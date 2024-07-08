@@ -142,8 +142,9 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
-
-const book = getBook(1);book;
+/*
+const book = getBook(3);
+book;
 // const title = book.title;
 // const author = book.author;
 
@@ -166,13 +167,65 @@ updatedBook;
 const getYear = (str) => str.split("-")[0];
 console.log(getYear(publicationDate));
 
-
 const summary = `${title}, a ${pages}-page long book, was written by ${author} and published in ${getYear(
   publicationDate
 )}. The book has${hasMovieAdaptation ? "" : " not"} been adapted as a movie`;
 summary;
 
 const pagesRange = pages > 1000 ? "Over a thousands" : "less than 1000";
-pagesRange
+pagesRange;
 console.log(`The book has ${pagesRange} pages`);
 
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+spanishTranslation;
+
+const getTotalReviewCount = function (book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  goodreads;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  librarything;
+
+  return goodreads + librarything;
+};
+
+console.log(getTotalReviewCount(book));
+*/
+/*
+const books = getBooks();
+books;
+
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+}));
+essentialData;
+
+const longbookWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longbookWithMovie;
+
+const adventureBooks = books
+  .filter((books) => books.genres.includes("adventure"))
+  .map((x) => x.title);
+adventureBooks;
+
+const pageAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+pageAllBooks;
+
+const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+sortedByPages;
+*/
+
+async function getToDos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/");
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
+const toDos = getToDos();
+console.log(toDos);
